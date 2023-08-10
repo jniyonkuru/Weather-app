@@ -11,6 +11,7 @@ const weatherIcon=document.querySelector('.weather-icon');
             document.querySelector('.message').style.display='block';
             document.querySelector('.weather').style.display='none';
         }else{
+           document.querySelector('.card').style.display='block';
            document.querySelector('.weather').style.display='flex';
            document.querySelector('.message').style.display='none';
            const data= await response.json();
@@ -46,6 +47,7 @@ const weatherIcon=document.querySelector('.weather-icon');
         }
         searchButton.addEventListener('click',(e)=>{
             document.querySelector('.search').style.display='none';
+            document.querySelector('.card').style.display='none';
             document.querySelector('.loader').style.display='block';    
              let  time=setTimeout(getWeatherData,2000);
            });
