@@ -1,12 +1,12 @@
 
-
 const searchBox=document.querySelector('.search input');
 const searchButton=document.querySelector('.search button');
 const weatherIcon=document.querySelector('.weather-icon');
-    async function getWeatherData(city){
+    async function getWeatherData(){
         const apiUrl='https://api.weatherapi.com/v1/forecast.json?';
         const apiKey='414893b50f314024b8540738232907';
-        const response=  await fetch(apiUrl+`key=${apiKey}`+`&q=${city}`);
+        const response=  await fetch(apiUrl+`key=${apiKey}`+`&q=${searchBox.value}&days=7`);
+        document.querySelector('.loader').style.display='none';
         if(response.status==400){
             document.querySelector('.message').style.display='block';
             document.querySelector('.weather').style.display='none';
@@ -14,6 +14,7 @@ const weatherIcon=document.querySelector('.weather-icon');
            document.querySelector('.weather').style.display='flex';
            document.querySelector('.message').style.display='none';
            const data= await response.json();
+           console.log(data);
            const currentData={};
            currentData.name=data.location.name;
            currentData.tempC= Math.round(data.current.temp_c);
@@ -43,10 +44,10 @@ const weatherIcon=document.querySelector('.weather-icon');
            
            };
         }
-        searchButton.addEventListener('click',()=>{
-           
-            getWeatherData(searchBox.value);
-           
+        searchButton.addEventListener('click',(e)=>{
+            document.querySelector('.search').style.display='none';
+            document.querySelector('.loader').style.display='block';    
+             let  time=setTimeout(getWeatherData,2000);
            });
         
 
